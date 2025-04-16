@@ -16,16 +16,27 @@ class Button:
         cls.font = font
 
     @classmethod
-    def create_buttons(cls, moves):
+    def create_game_buttons(cls, moves):
         row_x_start = (1280 - (2 * BUTTON_WIDTH + PADDING_X)) // 2
         row1_y = 720 - BOTTOM_OFFSET - (BUTTON_HEIGHT + PADDING_Y)
         row2_y = row1_y + BUTTON_HEIGHT + PADDING_Y
         
         buttons = [
-        cls(row_x_start, row1_y, cls.capitalize(moves[0]["name"]), True),
-        cls(row_x_start + BUTTON_WIDTH + PADDING_X, row1_y, cls.capitalize(moves[1]["name"]), True),
-        cls(row_x_start, row2_y, cls.capitalize(moves[2]["name"]), True),
-        cls(row_x_start + BUTTON_WIDTH + PADDING_X, row2_y, cls.capitalize(moves[3]["name"]), True),
+            cls(100, 100, "Main Menu", True),
+            cls(row_x_start, row1_y, cls.capitalize(moves[0]["name"]), True),
+            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row1_y, cls.capitalize(moves[1]["name"]), True),
+            cls(row_x_start, row2_y, cls.capitalize(moves[2]["name"]), True),
+            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row2_y, cls.capitalize(moves[3]["name"]), True),
+        ]
+        return buttons
+    
+    @classmethod
+    def create_main_menu_buttons(cls):
+        buttons = [
+            cls(360, 200, "Pikachu", True),
+            cls(360, 300, "Bulbasaur", True),
+            cls(360, 400, "Squirtle", True),
+            cls(360, 500, "Charmander", True)
         ]
         return buttons
     
