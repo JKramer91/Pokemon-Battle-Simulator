@@ -51,7 +51,7 @@ class Button:
     def button_clicked(buttons):
         for button in buttons:
             if button.check_click():
-                return True, button.text.lower()
+                return True, button.value
         return False, None
     
     def draw(self):
