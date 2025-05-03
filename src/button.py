@@ -4,12 +4,13 @@ class Button:
     screen = None
     font = None
 
-    def __init__(self, x, y, text, enabled):
+    def __init__(self, x, y, text, value = None, width = 150, height = 50):
         self.x = x
         self.y = y
         self.text = text
-        self.enabled = enabled
-
+        self.value = value if value else text.lower()
+        self.rect = pygame.rect.Rect((self.x, self.y), (width, height))
+    
     @classmethod
     def set_screen_and_font(cls, screen, font):
         cls.screen = screen
@@ -23,20 +24,20 @@ class Button:
         
         buttons = [
             cls(100, 100, "Main Menu", True),
-            cls(row_x_start, row1_y, cls.capitalize(moves[0]["name"]), True),
-            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row1_y, cls.capitalize(moves[1]["name"]), True),
-            cls(row_x_start, row2_y, cls.capitalize(moves[2]["name"]), True),
-            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row2_y, cls.capitalize(moves[3]["name"]), True),
+            cls(row_x_start, row1_y, cls.capitalize(moves[0]["name"])),
+            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row1_y, cls.capitalize(moves[1]["name"])),
+            cls(row_x_start, row2_y, cls.capitalize(moves[2]["name"])),
+            cls(row_x_start + BUTTON_WIDTH + PADDING_X, row2_y, cls.capitalize(moves[3]["name"])),
         ]
         return buttons
     
     @classmethod
     def create_main_menu_buttons(cls):
         buttons = [
-            cls(360, 200, "Pikachu", True),
-            cls(360, 300, "Bulbasaur", True),
-            cls(360, 400, "Squirtle", True),
-            cls(360, 500, "Charmander", True)
+            cls(360, 200, "Pikachu", "pikachu"),
+            cls(360, 300, "Bulbasaur", "bulbasaur"),
+            cls(360, 400, "Squirtle", "squirtle"),
+            cls(360, 500, "Charmander", "charmander")
         ]
         return buttons
     
@@ -46,24 +47,29 @@ class Button:
         arr = [v.capitalize() for v in arr]
         return " ".join(arr)
 
+    @staticmethod
+    def button_clicked(buttons):
+        for button in buttons:
+            if button.check_click():
+                return True, button.text.lower()
+        return False, None
+    
     def draw(self):
         text_surface = self.font.render(self.text, True, 'black')
-        rect = pygame.rect.Rect((self.x, self.y), (150, 50))
         
-        text_rect = text_surface.get_rect(center=rect.center)
+        text_rect = text_surface.get_rect(center=self.rect.center)
         if self.check_click():
-            pygame.draw.rect(self.screen, 'dark gray', rect, 0, 5)
+            pygame.draw.rect(self.screen, 'dark gray', self.rect, 0, 5)
         else:
-            pygame.draw.rect(self.screen, 'gray', rect, 0, 5)
+            pygame.draw.rect(self.screen, 'gray', self.rect, 0, 5)
 
-        pygame.draw.rect(self.screen, 'black', rect, 2, 5)
+        pygame.draw.rect(self.screen, 'black', self.rect, 2, 5)
         self.screen.blit(text_surface, text_rect)
     
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
         left_click = pygame.mouse.get_pressed()[0]
-        rect = pygame.rect.Rect((self.x, self.y), (150, 50))
         
-        if left_click and rect.collidepoint(mouse_pos) and self.enabled:
+        if left_click and self.rect.collidepoint(mouse_pos):
             return True
         return False

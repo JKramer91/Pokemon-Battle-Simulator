@@ -32,11 +32,16 @@ def main():
             draw_main_menu(main_menu_buttons)
             draw_main_menu_text(screen, font, (0,0,0), 220, 150)
 
-            if main_menu_buttons[0].check_click():
+            was_clicked, pokemon = Button.button_clicked(main_menu_buttons)
+            
+            # Flip the display once such that the user can see the button going dark gray indicating a button press
+            pygame.display.flip()
+
+            if was_clicked:
                 has_player_chosen = True
 
             if has_player_chosen:
-                player_data = get_pokemon_data("pikachu")
+                player_data = get_pokemon_data(pokemon)
                 attributes = extract_attributes(player_data)
                 enemy_data = get_pokemon_data("charmander")
                 enemy_attributes = extract_attributes(enemy_data)
