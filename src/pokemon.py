@@ -4,4 +4,5 @@ class Pokemon:
         self.id = attributes["id"]
         self.stats = attributes["stats"]
         self.moves = attributes["moves"]
+        self.current_hp = self.stats["hp"]
     

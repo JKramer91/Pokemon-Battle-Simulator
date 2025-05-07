@@ -23,7 +23,7 @@ class Button:
         row2_y = row1_y + BUTTON_HEIGHT + PADDING_Y
         
         buttons = [
-            cls(100, 100, "Main Menu", True),
+            cls(1100, 30, "Main Menu"),
             cls(row_x_start, row1_y, cls.capitalize(moves[0]["name"])),
             cls(row_x_start + BUTTON_WIDTH + PADDING_X, row1_y, cls.capitalize(moves[1]["name"])),
             cls(row_x_start, row2_y, cls.capitalize(moves[2]["name"])),
