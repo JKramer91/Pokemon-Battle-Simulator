@@ -1,12 +1,10 @@
 import pygame
 from constants import *
 from button import Button
-from pokemon import Pokemon
 from scenes import draw_game
-from api import get_pokemon_data, extract_attributes
 from uimanager import UIManager
-from healthbar import HealthBar
 from scenemanager import SceneManager
+from game import Game
 
 def main():
     pygame.init()
@@ -17,8 +15,7 @@ def main():
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     scene_manager = SceneManager()
     ui_manager = UIManager()
-    player_pokemon = None
-    enemy_pokemon = None
+    game = Game()
 
     while True:
         Button.set_screen_and_font(screen, font)
@@ -39,18 +36,11 @@ def main():
                 scene_manager.has_player_chosen = True
 
             if scene_manager.has_player_chosen:
-                player_data = get_pokemon_data(pokemon)
-                attributes = extract_attributes(player_data)
-                enemy_data = get_pokemon_data("charmander")
-                enemy_attributes = extract_attributes(enemy_data)
-                player_pokemon = Pokemon(attributes)
-                enemy_pokemon = Pokemon(enemy_attributes)
-                player_healthbar = HealthBar(125, 420, 200, 20, player_pokemon.current_hp)
-                enemy_healthbar = HealthBar(755, 245, 200, 20, player_pokemon.current_hp)
-                ui_manager.create_game_buttons(attributes["moves"])
+                game.setup(pokemon)
+                ui_manager.create_game_buttons(game.player_pokemon.moves)
                 scene_manager.go_to("battle")
         else:
-            draw_game(screen, ui_manager.game_buttons, player_pokemon, enemy_pokemon, player_healthbar, enemy_healthbar)
+            draw_game(screen, ui_manager.game_buttons, game.player_pokemon, game.enemy_pokemon, game.player_healthbar, game.enemy_healthbar)
 
             # If the "Main Menu"-button is clicked, switch to main menu scene
             if ui_manager.is_game_button_clicked():
@@ -58,7 +48,6 @@ def main():
                 scene_manager.has_player_chosen = False
 
         pygame.display.flip()
-
 
 if __name__ == "__main__":
     main()
