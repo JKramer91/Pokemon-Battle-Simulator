@@ -51,6 +51,7 @@ class Button:
     def button_clicked(buttons):
         for button in buttons:
             if button.check_click():
+                print(button.value)
                 return True, button.value
         return False, None
     

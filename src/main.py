@@ -5,6 +5,7 @@ from scenes import draw_game
 from uimanager import UIManager
 from scenemanager import SceneManager
 from game import Game
+import time
 
 def main():
     pygame.init()
@@ -27,7 +28,7 @@ def main():
 
         if scene_manager.current_scene == "main_menu":
             ui_manager.draw_main_menu(screen, font)
-            was_clicked, pokemon = ui_manager.is_main_menu_button_clicked()
+            was_clicked, pokemon = ui_manager.is_pokemon_clicked()
             
             # Flip the display once such that the user can see the button going dark gray indicating a button press
             pygame.display.flip()
@@ -39,11 +40,15 @@ def main():
                 game.setup(pokemon)
                 ui_manager.create_game_buttons(game.player_pokemon.moves)
                 scene_manager.go_to("battle")
+                
         else:
             draw_game(screen, ui_manager.game_buttons, game.player_pokemon, game.enemy_pokemon, game.player_healthbar, game.enemy_healthbar)
-
+            
+            #if ui_manager.game_buttons[1].check_click():
+            #    print("Testing that it works")
+            
             # If the "Main Menu"-button is clicked, switch to main menu scene
-            if ui_manager.is_game_button_clicked():
+            if ui_manager.is_main_menu_button_clicked():
                 scene_manager.go_to("main_menu")
                 scene_manager.has_player_chosen = False
 

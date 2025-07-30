@@ -9,12 +9,13 @@ class UIManager:
         draw_main_menu(self.main_menu_buttons)
         draw_main_menu_text(screen, font, (0,0,0), 220, 150)
     
-    def is_main_menu_button_clicked(self):
+    def is_pokemon_clicked(self):
         return Button.button_clicked(self.main_menu_buttons)
     
     def create_game_buttons(self, buttons):
         self.game_buttons = Button.create_game_buttons(buttons)
     
-    def is_game_button_clicked(self):
+    def is_main_menu_button_clicked(self):
         return self.game_buttons[0].check_click()
+        
 
