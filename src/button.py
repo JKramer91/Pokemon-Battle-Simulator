@@ -3,14 +3,13 @@ from constants import *
 class Button:
     screen = None
     font = None
-
     def __init__(self, x, y, text, value = None, width = 150, height = 50):
         self.x = x
         self.y = y
         self.text = text
         self.value = value if value else text.lower()
         self.rect = pygame.rect.Rect((self.x, self.y), (width, height))
-    
+        self.clicked = False
     @classmethod
     def set_screen_and_font(cls, screen, font):
         cls.screen = screen
@@ -70,7 +69,11 @@ class Button:
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
         left_click = pygame.mouse.get_pressed()[0]
-        
-        if left_click and self.rect.collidepoint(mouse_pos):
-            return True
+
+        if self.rect.collidepoint(mouse_pos):
+            if left_click: #and not self.clicked:        
+                #self.clicked = True
+                return True
+            if not left_click:
+                self.clicked = False
         return False
