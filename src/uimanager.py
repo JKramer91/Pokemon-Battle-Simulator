@@ -12,6 +12,9 @@ class UIManager:
     def is_pokemon_clicked(self):
         return Button.button_clicked(self.main_menu_buttons)
     
+    def is_move_clicked(self):
+        return Button.move_button_clicked(self.game_buttons[1:])
+    
     def create_game_buttons(self, buttons):
         self.game_buttons = Button.create_game_buttons(buttons)
     

@@ -50,8 +50,14 @@ class Button:
     def button_clicked(buttons):
         for button in buttons:
             if button.check_click():
-                print(button.value)
                 return True, button.value
+        return False, None
+    
+    @staticmethod
+    def move_button_clicked(buttons):
+        for i in range(0, 4):
+            if buttons[i].check_click():
+                return True, i
         return False, None
     
     def draw(self):
@@ -68,12 +74,8 @@ class Button:
     
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
-        left_click = pygame.mouse.get_pressed()[0]
 
         if self.rect.collidepoint(mouse_pos):
-            if left_click: #and not self.clicked:        
-                #self.clicked = True
+            if pygame.mouse.get_pressed()[0]:
                 return True
-            if not left_click:
-                self.clicked = False
         return False

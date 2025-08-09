@@ -45,8 +45,6 @@ def main():
             game.game_on(ui_manager)
             if game.is_game_over:
                 break
-            #if ui_manager.game_buttons[1].check_click():
-            #    print("Testing that it works")
             
             # If the "Main Menu"-button is clicked, switch to main menu scene
             if ui_manager.is_main_menu_button_clicked():
