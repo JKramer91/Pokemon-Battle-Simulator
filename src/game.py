@@ -28,8 +28,8 @@ class Game:
         enemy_attributes = extract_attributes(enemy_data)
         self.player_pokemon = Pokemon(attributes)
         self.enemy_pokemon = Pokemon(enemy_attributes)
-        self.player_healthbar = HealthBar(125, 420, 200, 20, self.player_pokemon.current_hp)
-        self.enemy_healthbar = HealthBar(755, 245, 200, 20, self.enemy_pokemon.current_hp)
+        self.player_healthbar = HealthBar(135, 450, 200, 20, self.player_pokemon.current_hp)
+        self.enemy_healthbar = HealthBar(810, 350, 200, 20, self.enemy_pokemon.current_hp)
         self.game_state = GameState.PLAYER_TURN
 
         # Signals that the game is properly setup and that playing can start

@@ -1,15 +1,19 @@
 import pygame
 from constants import *
+from game import GameState
 
-def draw_main_menu(main_menu_buttons):
+def draw_main_menu(screen, font, main_menu_buttons):
+    draw_main_menu_buttons(main_menu_buttons)
+    draw_main_menu_text(screen, font, (0,0,0), 200, 360)
+
+def draw_main_menu_buttons(main_menu_buttons):
     for button in main_menu_buttons:
          button.draw()
 
 def draw_main_menu_text(screen, font, color, x, y):
-    img = font.render("Choose a Pokémon for battle!", True, color)
+    img = font.render("Welcome to Jonas' Pokémon Battle Simulator. Please choose the Pokémon you want for the battle!", True, color)
     screen.blit(img, (x, y))
      
-
 def draw_game(screen, game_buttons, player_pokemon, enemy_pokemon, player_healthbar, enemy_healthbar):
     for button in game_buttons:
             button.draw()
@@ -31,8 +35,20 @@ def draw_pokemon(screen, player_pokemon, enemy_pokemon):
     _, player_height = scaled_player_sprite.get_size()
     enemy_width, _ = scaled_enemy_sprite.get_size()
 
-    player_pos = (50, SCREEN_HEIGHT - player_height)
-    enemy_pos = (SCREEN_WIDTH - enemy_width - 250, 175)
+    player_pos = (50, SCREEN_HEIGHT - player_height + 30)
+    enemy_pos = (SCREEN_WIDTH - enemy_width - 175, 280)
      
     screen.blit(scaled_player_sprite, player_pos)
     screen.blit(scaled_enemy_sprite, enemy_pos)
+
+def draw_game_over(screen, font, game, game_buttons):
+    game_buttons[0].draw()
+    draw_game_over_text(screen, font, (0,0,0), 420, 360, game)
+
+def draw_game_over_text(screen, font, color, x, y, game):
+    if game.game_state == GameState.WON:
+        img = font.render("Congratulations, you won the game! Want to play again?", True, color)
+        screen.blit(img, (x, y))
+    else:
+        img = font.render("You lost the game! Want to try again?", True, color)
+        screen.blit(img, (x, y))

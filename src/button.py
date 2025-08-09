@@ -18,7 +18,7 @@ class Button:
     @classmethod
     def create_game_buttons(cls, moves):
         row_x_start = (1280 - (2 * BUTTON_WIDTH + PADDING_X)) // 2
-        row1_y = 720 - BOTTOM_OFFSET - (BUTTON_HEIGHT + PADDING_Y)
+        row1_y = 765 - BOTTOM_OFFSET - (BUTTON_HEIGHT + PADDING_Y)
         row2_y = row1_y + BUTTON_HEIGHT + PADDING_Y
         
         buttons = [
@@ -33,10 +33,10 @@ class Button:
     @classmethod
     def create_main_menu_buttons(cls):
         buttons = [
-            cls(360, 200, "Pikachu", "pikachu"),
-            cls(360, 300, "Bulbasaur", "bulbasaur"),
-            cls(360, 400, "Squirtle", "squirtle"),
-            cls(360, 500, "Charmander", "charmander")
+            cls(565, 420, "Pikachu", "pikachu"),
+            cls(565, 480, "Bulbasaur", "bulbasaur"),
+            cls(565, 540, "Squirtle", "squirtle"),
+            cls(565, 600, "Charmander", "charmander")
         ]
         return buttons
     
