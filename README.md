@@ -1,5 +1,5 @@
 # Pokémon Battle Simulator
-A small fun side project I built in Python using Pygame.
+A small fun side project I built in Python using Pygame.  
 The goal was to combine my love of programming and Pokémon in order to create a simple turn-based Pokémon battle simulator. This was done purely for practice and enjoyment, and is in no way intended to be a full fan game.
 
 # Overview
