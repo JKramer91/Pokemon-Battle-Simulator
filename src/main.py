@@ -5,7 +5,6 @@ from scenes import *
 from uimanager import UIManager
 from scenemanager import SceneManager, Scene
 from game import Game
-import time
 
 def main():
     pygame.init()
@@ -15,11 +14,11 @@ def main():
     background = pygame.image.load("assets/background/background.png")
     background = pygame.transform.scale(background, (SCREEN_WIDTH, SCREEN_HEIGHT))
     scene_manager = SceneManager()
+    Button.set_screen_and_font(screen, font)
     ui_manager = UIManager()
     game = Game()
 
     while True:
-        Button.set_screen_and_font(screen, font)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return

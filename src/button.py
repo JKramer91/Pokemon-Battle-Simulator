@@ -3,13 +3,26 @@ from constants import *
 class Button:
     screen = None
     font = None
-    def __init__(self, x, y, text, value = None, width = 150, height = 50):
+    def __init__(self, x, y, text, value = None, width = 150, height = 50,):
         self.x = x
         self.y = y
         self.text = text
         self.value = value if value else text.lower()
         self.rect = pygame.rect.Rect((self.x, self.y), (width, height))
         self.clicked = False
+        
+        # Caching
+        self.text_surface = self.font.render(self.text, True, 'black')
+        self.text_rect = self.text_surface.get_rect(center=self.rect.center)
+
+        self.normal_surface = pygame.Surface((width, height))
+        self.normal_surface.fill('gray')
+        pygame.draw.rect(self.normal_surface, 'black', self.normal_surface.get_rect(), 2, 5)
+
+        self.hover_surface = pygame.Surface((width, height))
+        self.hover_surface.fill('dark gray')
+        pygame.draw.rect(self.hover_surface, 'black', self.hover_surface.get_rect(), 2, 5)
+
     @classmethod
     def set_screen_and_font(cls, screen, font):
         cls.screen = screen
@@ -61,16 +74,10 @@ class Button:
         return False, None
     
     def draw(self):
-        text_surface = self.font.render(self.text, True, 'black')
-        
-        text_rect = text_surface.get_rect(center=self.rect.center)
-        if self.check_click():
-            pygame.draw.rect(self.screen, 'dark gray', self.rect, 0, 5)
-        else:
-            pygame.draw.rect(self.screen, 'gray', self.rect, 0, 5)
+        surface = self.hover_surface if self.check_click() else self.normal_surface
 
-        pygame.draw.rect(self.screen, 'black', self.rect, 2, 5)
-        self.screen.blit(text_surface, text_rect)
+        self.screen.blit(surface, self.rect.topleft)
+        self.screen.blit(self.text_surface, self.text_rect)
     
     def check_click(self):
         mouse_pos = pygame.mouse.get_pos()
