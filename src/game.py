@@ -1,4 +1,4 @@
-import random, time
+import random, pygame
 from api import get_pokemon_data, extract_attributes
 from pokemon import Pokemon
 from healthbar import HealthBar
@@ -20,6 +20,8 @@ class Game:
         self.is_initialized = False
         self.is_game_over = False
         self.prev_clicked = False
+        self.last_attack_time = 0
+        self.wait_time = 2000
 
     def setup(self, pokemon):
         player_data = get_pokemon_data(pokemon)
@@ -70,8 +72,18 @@ class Game:
             self.game_state = GameState.ENEMY_TURN
     
     def handle_enemy_turn(self):
-        move = random.randint(0, 3)
+        current_time = pygame.time.get_ticks()
+
+        if self.last_attack_time== 0:
+            self.last_attack_time = current_time
+
+        if current_time - self.last_attack_time < self.wait_time:
+            return
+
+        move = random.randint(0, 3)    
         self.enemy_attack(self.enemy_pokemon.moves[move])
+        self.last_attack_time = 0
+        
 
     def enemy_attack(self, move):
         print(f"{self.enemy_pokemon.name} attacked {self.player_pokemon.name}")
