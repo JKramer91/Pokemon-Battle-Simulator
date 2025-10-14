@@ -1,4 +1,5 @@
 # Pokémon Battle Simulator
+![Pokémon Battle Simulator](https://i.imgur.com/pDr5tQB.png)
 A small fun side project I built in Python using Pygame.  
 
 The goal was to combine my love of programming and Pokémon in order to create a simple turn-based Pokémon battle simulator. This was done purely for practice and enjoyment, and is in no way intended to be a full fan game.
@@ -27,8 +28,17 @@ As should be clear from the above, there’s plenty of room for further extensio
    source venv/bin/activate
    ```
 2. Install the necessary dependencies:
-
+   
     ```
     pip install -r requirements.txt
     ```
- WIP!!
+3. Run the game:
+
+   ```
+   python3 src/main.py
+   ```
+
+## Disclaimer
+This is a **fan-made project created purely for learning and entertainment.**
+
+Pokémon and all related assets are © The Pokémon Company.
