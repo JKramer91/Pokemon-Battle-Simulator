@@ -26,4 +26,9 @@ As should be clear from the above, there’s plenty of room for further extensio
    ```
    source venv/bin/activate
    ```
-3. 
+2. Install the necessary dependencies:
+
+    ```
+    pip install -r requirements.txt
+    ```
+ WIP!!
