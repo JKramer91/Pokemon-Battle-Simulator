@@ -16,11 +16,14 @@ As should be clear from the above, there’s plenty of room for further extensio
 
 ## How to Run
 1. Create a virtual environment:
+   
    ```
    python3 -m venv venv
    ```
+   
    and then activate it:
+   
    ```
    source venv/bin/activate
    ```
-2. 
+3. 
